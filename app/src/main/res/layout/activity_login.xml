@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:paddingTop="40dp"
+    android:paddingHorizontal="28dp"
+    android:clickable="true"
+    android:focusableInTouchMode="true"
+    tools:context=".view.activity.auth.LoginActivity">
+
+    <ImageView
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/bg_corner_radius_all_logo"
+        android:padding="16dp"
+        android:src="@drawable/_logo_white" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="28dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/helvetica_bold"
+            android:textColor="@color/dark_blue"
+            android:textSize="44dp"
+            android:lineHeight="40dp"
+            android:text="Masuk" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/helvetica"
+            android:textColor="@color/sec_blue"
+            android:layout_marginTop="-12dp"
+            android:textSize="16dp"
+            android:text="Silahkan masuk ke akun anda" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="12dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
+            android:fontFamily="@font/helvetica_bold"
+            android:textColor="@color/dark_blue"
+            android:textSize="14dp"
+            android:text="NIM atau Email" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/etUserNim"
+            android:inputType="textEmailAddress"
+            android:textSize="16dp"
+            android:textColorHint="@color/sec_blue"
+            android:textColor="@color/black"
+            android:paddingVertical="13dp"
+            android:paddingHorizontal="20dp"
+            android:layout_marginBottom="12dp"
+            android:fontFamily="@font/helvetica"
+            android:hint="Masukkan Nama atau Email"
+            android:background="@drawable/bg_corner_radius_all_input"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/helvetica_bold"
+            android:textColor="@color/dark_blue"
+            android:textSize="14dp"
+            android:text="Password" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:id="@+id/etPassword"
+                android:textSize="16dp"
+                android:textColorHint="@color/sec_blue"
+                android:textColor="@color/black"
+                android:paddingVertical="13dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="48dp"
+                android:fontFamily="@font/helvetica"
+                android:hint="Masukkan Password"
+                android:background="@drawable/bg_corner_radius_all_input"
+                />
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:id="@+id/ivTogglePassword"
+                android:layout_alignEnd="@+id/etPassword"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="12dp"
+                android:src="@drawable/_eye"
+                />
+
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvForgetPassword"
+            android:fontFamily="@font/helvetica"
+            android:textColor="@color/dark_blue"
+            android:textSize="14dp"
+            android:text="@string/under_lupa_password" />
+
+
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnLogin"
+        android:background="@drawable/bg_corner_radius_full_all_fill_blue"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:fontFamily="@font/helvetica_bold"
+        android:textSize="16dp"
+        android:paddingHorizontal="16dp"
+        android:text="Masuk"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="28dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/helvetica"
+            android:textColor="@color/sec_blue"
+            android:textSize="14dp"
+            android:layout_marginRight="4dp"
+            android:text="Apakah anda belum punya akun?" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvRegister"
+            android:fontFamily="@font/helvetica_bold"
+            android:textColor="@color/blue"
+            android:textSize="14dp"
+            android:text="@string/under_daftar" />
+
+    </LinearLayout>
+
+</LinearLayout>

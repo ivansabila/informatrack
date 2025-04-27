@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "418485726112",
+    "firebase_url": "https://informatrack-ta-default-rtdb.firebaseio.com",
+    "project_id": "informatrack-ta",
+    "storage_bucket": "informatrack-ta.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:418485726112:android:8ec00da5bb8167948f12c5",
+        "android_client_info": {
+          "package_name": "com.example.informatrackta"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3fpxIi1OGTZ9OQFxX36f9OqO40iFI9b4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

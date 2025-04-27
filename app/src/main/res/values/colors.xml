@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--  base color  -->
+    <!--  background  -->
+    <color name="white">#FFF3F3F3</color>
+    <!--  primary  -->
+    <color name="blue">#FF333683</color>
+    <!--  secondary  -->
+    <color name="sec_white">#FFECECEE</color>
+
+    <!--  font color  -->
+    <!--  primary  -->
+    <color name="dark_blue">#FF262861</color>
+    <!--  secondary  -->
+    <color name="sec_blue">#FF999999</color>
+    <!--  tertiary  -->
+    <color name="black">#FF333333</color>
+
+    <!--  stroke color  -->
+    <color name="grey">#FFCCCCCC</color>
+
+    <!--  status color  -->
+    <!--  success  -->
+    <color name="success">#FF55D174</color>
+
+
+</resources>
