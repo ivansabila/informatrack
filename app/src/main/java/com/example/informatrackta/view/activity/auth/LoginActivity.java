@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.example.informatrackta.R;
 import com.example.informatrackta.view.activity.dashboard.admin.DashboardAdminActivity;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -37,6 +38,7 @@ public class LoginActivity extends AppCompatActivity {
     private ImageView ivTogglePassword;
     private boolean isPasswordVisible = false;
     private FirebaseAuth firebaseAuth;
+    private FirebaseUser firebaseUser;
     private DatabaseReference databaseReference;
 
     @Override
@@ -48,6 +50,8 @@ public class LoginActivity extends AppCompatActivity {
         actionComponents();
         showHidePassword();
         eventOnFocus();
+
+
     }
 
     @Override
@@ -56,6 +60,16 @@ public class LoginActivity extends AppCompatActivity {
         // mengatur transisi ketika lifecycle finish (ketika click tombol kembali dari sistem)
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        firebaseUser = firebaseAuth.getCurrentUser();
+        if (firebaseUser != null) {
+            checkRole();
+        }
+    }
+
 
     private void initComponents() {
         // inisialisasi semua component yang ada pada file xml
@@ -162,14 +176,14 @@ public class LoginActivity extends AppCompatActivity {
         if (userNim.contains("@")) {
             String regexEmail = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
             if (!userNim.matches(regexEmail)) {
-                etUserNim.setError("Email tidak valid");
+                etUserNim.setError("NIM atau Email tidak valid");
                 etUserNim.requestFocus();
                 return true;
             }
         } else {
             String regexStudentId = "^[0-9]+$";
             if (userNim.length() < 8 || userNim.length() > 9 && !userNim.matches(regexStudentId)) {
-                etUserNim.setError("NIM tidak valid");
+                etUserNim.setError("NIM atau Email tidak valid");
                 etUserNim.requestFocus();
                 return true;
             }
@@ -216,48 +230,9 @@ public class LoginActivity extends AppCompatActivity {
         firebaseAuth.signInWithEmailAndPassword(userNim, password)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        // ambil Uid user
-                        uid = firebaseAuth.getCurrentUser().getUid();
-
-                        // retrieve data dengan document uid
-                        databaseReference.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                // cek keberadaan data di database
-                                if (snapshot.exists()) {
-                                    // ambil data isApproved dan role dari database
-                                    isApproved = snapshot.child("isApproved").getValue(Boolean.class);
-                                    role = snapshot.child("role").getValue(String.class);
-
-                                    // validasi isApproved user
-                                    if (isApproved == null || !isApproved) {
-                                        firebaseAuth.signOut();
-                                        toast("Akun anda belum disetujui oleh TU Program Studi");
-                                        return;
-                                    }
-
-                                    // validasi role user
-                                    switch (role) {
-                                        case "admin":
-                                            startActivity(new Intent(LoginActivity.this, DashboardAdminActivity.class));
-                                            break;
-                                        case "dosen":
-                                            // startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                                            break;
-                                        case "mahasiswa":
-                                            // startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                                            break;
-                                    }
-                                }
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
-                                Log.e("GAGAL MENGAMBIL DATA", error.getMessage());
-                            }
-                        });
+                        checkRole();
                     } else {
-                        Log.e("GAGAL MASUK KE DATA", task.getException().getMessage());
+                        toast("Lengkapi data anda dengan benar");
                     }
                 });
     }
@@ -285,5 +260,48 @@ public class LoginActivity extends AppCompatActivity {
                         Log.e("GAGAL MENCARI NIM", error.getMessage());
                     }
                 });
+    }
+
+    private void checkRole() {
+        // ambil Uid user
+        uid = firebaseAuth.getCurrentUser().getUid();
+
+        // retrieve data dengan document uid
+        databaseReference.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                // cek keberadaan data di database
+                if (snapshot.exists()) {
+                    // ambil data isApproved dan role dari database
+                    isApproved = snapshot.child("isApproved").getValue(Boolean.class);
+                    role = snapshot.child("role").getValue(String.class);
+
+                    // validasi isApproved user
+                    if (isApproved == null || !isApproved) {
+                        firebaseAuth.signOut();
+                        toast("Akun anda belum disetujui oleh TU Program Studi");
+                        return;
+                    }
+
+                    // validasi role user
+                    switch (role) {
+                        case "admin":
+                            startActivity(new Intent(LoginActivity.this, DashboardAdminActivity.class));
+                            break;
+                        case "dosen":
+                            // startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                            break;
+                        case "mahasiswa":
+                            // startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                            break;
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("GAGAL MENGAMBIL DATA", error.getMessage());
+            }
+        });
     }
 }
